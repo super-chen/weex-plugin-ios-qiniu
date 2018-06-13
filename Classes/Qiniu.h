@@ -7,8 +7,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import  "WXModuleProtocol.h"
 
-@interface QBMUtil : NSObject
-+ (UIColor *) colorWithHexString: (NSString *) stringToConvert;
+@interface Qiniu : NSObject<WXModuleProtocol>
++ (void)log;
 @end
 
