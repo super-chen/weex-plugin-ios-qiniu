@@ -6,7 +6,6 @@
 //  Copyright © 2018年 qbm Company. All rights reserved.
 
 #import "Qiniu.h"
-#import <WeexPluginLoader/WeexPluginLoader/WeexPluginLoader.h>
 
 WX_PlUGIN_EXPORT_MODULE(dateTimePicker, QBMDatePickerModule)
 @implementation Qiniu
