@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import  "WXModuleProtocol.h"
+#import <WeexSDK/WeexSDK.h>
 
 @interface Qiniu : NSObject<WXModuleProtocol>
 + (void)log;
