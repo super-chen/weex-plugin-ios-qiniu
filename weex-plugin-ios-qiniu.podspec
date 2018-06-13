@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "weex-plugin-ios-qiniu"
-  s.version      = "0.1.2"
+  s.version      = "0.1.0"
   s.summary      = "weex-plugin-ios-qiniu File"
 
   s.description  = <<-DESC
