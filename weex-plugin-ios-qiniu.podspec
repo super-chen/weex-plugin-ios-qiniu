@@ -6,11 +6,11 @@ Pod::Spec.new do |s|
 
 
   s.name         = "weex-plugin-ios-qiniu"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "weex-plugin-ios-qiniu File"
 
   s.description  = <<-DESC
-                  weex-plugin-ios-qiniu
+                  weex-plugin-ios-qiniu 封装七牛SDK以支持Weex框架直接调用
                    DESC
 
   s.homepage     = 'https://github.com/super-chen/weex-plugin-ios-qiniu'
