@@ -5,8 +5,8 @@ Pod::Spec.new do |s|
 
 
 
-  s.name         = "weex-plugin-ios-qiniu"
-  s.version      = "0.1.9"
+  s.name         = "WeexPluginQiniu"
+  s.version      = "0.2.0"
   s.summary      = "weex-plugin-ios-qiniu File"
 
   s.description  = <<-DESC
@@ -25,9 +25,10 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => 'https://github.com/super-chen/weex-plugin-ios-qiniu.git', :tag => s.version }
 
-  s.source_files = "Classes/*.{h,m}"
+  s.source_files = "Classes","Classes/*.{h,m}"
 
   s.requires_arc = true
 
   s.dependency 'WeexSDK', '0.18'
+  s.dependency 'Qiniu', '7.1'
 end

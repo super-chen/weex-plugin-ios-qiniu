@@ -6,10 +6,10 @@
 //  Copyright © 2018年 qbm Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <WeexSDK/WeexSDK.h>
 
-@interface Qiniu : NSObject<WXModuleProtocol>
-+ (void)log;
+@interface QiniuModule : NSObject <WXModuleProtocol>
+
+
 @end
 
