@@ -8,6 +8,7 @@
 #import "QiniuModule.h"
 #import <QiniuSDK.h>
 #import <WeexPluginLoader/WeexPluginLoader/WeexPluginLoader.h>
+#import <UIImage+ImageCompress.h>
 
 WX_PlUGIN_EXPORT_MODULE(qiniu, QiniuModule)
 
@@ -20,14 +21,18 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
     NSString *token = [info valueForKey:@"token"];
     NSString *key = [info valueForKey:@"key"];
     NSString *path = [info valueForKey:@"path"];
-    UIImage *getImage = [UIImage imageWithContentsOfFile:path];
-    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    UIImage *getImage = [UIImage compressImage:image
+                                        compressRatio:0.6f];
+
     NSData *data;
     if (UIImagePNGRepresentation(getImage) == nil){
-        data = UIImageJPEGRepresentation(getImage, 0.8);
+        data = UIImageJPEGRepresentation(getImage, 1.0);
     } else {
         data = UIImagePNGRepresentation(getImage);
     }
+    
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:key token:token
               complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp)   {
                   NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
