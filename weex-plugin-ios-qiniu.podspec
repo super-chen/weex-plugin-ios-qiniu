@@ -31,4 +31,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'WeexSDK', '0.18'
   s.dependency 'Qiniu', '7.1'
+  s.dependency 'UIImage+ImageCompress','0.0.1'
+
 end
