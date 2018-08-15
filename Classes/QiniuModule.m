@@ -7,6 +7,7 @@
 
 #import "QiniuModule.h"
 #import <QiniuSDK.h>
+#import <HappyDNS.h>
 #import <WeexPluginLoader/WeexPluginLoader/WeexPluginLoader.h>
 #import <UIImage+ImageCompress.h>
 
@@ -22,7 +23,7 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
         NSMutableArray *array = [[NSMutableArray alloc] init];
         [array addObject:[QNResolver systemResolver]];
         QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
-        builder.zone = [[QNAutoZone alloc] initWithHttps:YES dns:dns];
+        builder.zone = [[QNAutoZone alloc] initWithDns:dns];
     }];
     NSString *token = [info valueForKey:@"token"];
     NSString *key = [info valueForKey:@"key"];
