@@ -18,6 +18,12 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
 
 - (void)uploadImage:(NSDictionary *)info callback:(WXModuleCallback)callback
 {
+    QNConfiguration *config =[QNConfiguration  	build:^(QNConfigurationBuilder *builder) {
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        [array addObject:[QNResolver systemResolver]];
+        QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
+        builder.zone = [[QNAutoZone alloc] initWithHttps:YES dns:dns];
+    }];
     NSString *token = [info valueForKey:@"token"];
     NSString *key = [info valueForKey:@"key"];
     NSString *path = [info valueForKey:@"path"];
