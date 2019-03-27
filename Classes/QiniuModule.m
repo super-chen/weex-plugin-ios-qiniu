@@ -19,7 +19,7 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
 
 - (void)uploadImage:(NSDictionary *)info callback:(WXModuleCallback)callback
 {
-    QNConfiguration *config =[QNConfiguration  	build:^(QNConfigurationBuilder *builder) {
+    QNConfiguration *config =[QNConfiguration    build:^(QNConfigurationBuilder *builder) {
         NSMutableArray *array = [[NSMutableArray alloc] init];
         [array addObject:[QNResolver systemResolver]];
         QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
@@ -39,13 +39,23 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
         data = UIImagePNGRepresentation(getImage);
     }
     
+    QNUploadOption *option = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
+        NSLog(@"%0.2f",percent);
+    }];
+    
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
-    [upManager putData:data key:key token:token
-              complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp)   {
-                  NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
-                  callback(result);
-              } option:nil];
+    if (getImage != nil) {
+        [upManager putData:data key:key token:token
+                  complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp)   {
+                      NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
+                      callback(result);
+                  } option:option];
+    } else {
+        [upManager putFile:path key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
+            callback(result);
+        } option:option];
+    }
 }
 
 @end
-
