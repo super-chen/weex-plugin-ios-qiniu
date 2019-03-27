@@ -17,9 +17,9 @@ WX_PlUGIN_EXPORT_MODULE(qiniu, QiniuModule)
 
 WX_EXPORT_METHOD(@selector(uploadImage:callback:))
 
-- (void)uploadImage:(NSDictionary *)info callback:(WXModuleCallback)callback
+- (void)uploadImage:(NSDictionary *)info callback:(WXKeepAliveCallback)callback
 {
-    QNConfiguration *config =[QNConfiguration    build:^(QNConfigurationBuilder *builder) {
+    QNConfiguration *config =[QNConfiguration  	build:^(QNConfigurationBuilder *builder) {
         NSMutableArray *array = [[NSMutableArray alloc] init];
         [array addObject:[QNResolver systemResolver]];
         QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
@@ -40,7 +40,8 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
     }
     
     QNUploadOption *option = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
-        NSLog(@"%0.2f",percent);
+        NSMutableDictionary *result = @{@"status":[NSNumber numberWithInt:2],@"message":@"",@"data":[NSNumber numberWithFloat:percent]};
+        callback(result,YES);
     }];
     
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
@@ -48,12 +49,14 @@ WX_EXPORT_METHOD(@selector(uploadImage:callback:))
         [upManager putData:data key:key token:token
                   complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp)   {
                       NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
-                      callback(result);
+                      //callback(result);
+                      callback(result,NO);
                   } option:option];
     } else {
         [upManager putFile:path key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
             NSMutableDictionary *result = @{@"status":@true,@"message":@"",@"data":resp};
-            callback(result);
+            //callback(result);
+            callback(result,NO);
         } option:option];
     }
 }
