@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'WeexSDK', '0.18'
+  s.dependency 'WeexSDK', '0.19'
   s.dependency 'Qiniu', '7.2.4'
   s.dependency 'UIImage+ImageCompress','0.0.1'
 
