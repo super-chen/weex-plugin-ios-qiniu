@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "WeexPluginQiniu"
-  s.version      = "0.2.9"
+  s.version      = "0.2.10"
   s.summary      = "weex-plugin-ios-qiniu File"
 
   s.description  = <<-DESC
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'WeexSDK', '0.19'
+  s.dependency 'WeexSDK', '0.20.0'
   s.dependency 'Qiniu', '7.2.4'
   s.dependency 'UIImage+ImageCompress','0.0.1'
 
